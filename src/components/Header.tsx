@@ -6,7 +6,7 @@ type HeaderProps = {
 
 const Header:React.FC<HeaderProps> = ({ headerTitle }) => {
     return (
-        <div className="flex bg-black text-white py-6">
+        <div className="flex bg-black text-white py-6 rounded-b-xl">
            <div className='relative'>
            <span className="absolute left-3 bottom-0"><IoArrowBack className="w-[24px] h-auto" /></span>
            </div>

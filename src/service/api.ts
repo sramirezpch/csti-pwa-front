@@ -1,26 +1,28 @@
 import axios from "axios";
-import { API_BASE_URL, API_TOKEN } from "../utils/env";
+import { API_URL } from "../utils/env";
 
-console.log(API_BASE_URL);
 
 const axiosInstance = axios.create({
-    baseURL: API_BASE_URL,
-    headers: { 
-        Authorization: "Bearer " + API_TOKEN,
-        "Access-Control-Allow-Origin": "http://localhost:5173",
-        "Content-Type": 'application/json',
-        Accept: "application/json, text/plain"
-    }
+    baseURL: API_URL
 })
 
-const getActualBalance = async () => {
+export const getActualBalance = async (signal: AbortSignal, controller: AbortController) => {
     try{
-        const res = await axiosInstance.get('/getActualBalance');
-    }catch(err){
+        const { data: { balanceCommerce } } = await axiosInstance.get('/getActualBalance', { signal });
+
+        return balanceCommerce;
+
+    }catch(err: any){
+        if(err.name === 'AbortError') controller.abort();
+
         console.error(err)
     }
 }
 
-export { 
-    getActualBalance
+export const getProviders = async (signal: AbortSignal, controller: AbortController) => {
+    try {
+        const { data } = await axiosInstance.get('/getProviders', { signal })
+
+        return data;
+    }catch(err: any){}
 }
