@@ -24,5 +24,9 @@ export const getProviders = async (signal: AbortSignal, controller: AbortControl
         const { data } = await axiosInstance.get('/getProviders', { signal })
 
         return data;
-    }catch(err: any){}
+    }catch(err: any){
+        if(err.name === 'AbortError') controller.abort();
+
+        console.error(err);
+    }
 }

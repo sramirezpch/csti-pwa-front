@@ -7,7 +7,6 @@ import PWAButton from "../components/PWAButton";
 import Header from "../components/Header";
 
 import { getActualBalance } from "../service/api";
-import { NavLink } from "react-router-dom";
 
 export default function HomeView() {
     const [balance, setBalance] = useState(undefined);
